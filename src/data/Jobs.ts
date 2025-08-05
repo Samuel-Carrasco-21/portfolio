@@ -42,33 +42,35 @@ interface WorkExperience {
  * @property {Array<string>} goals - A list of goals or achievements within the job.
  * @property {boolean} currentJob - A flag indicating if the job is the current one.
  */
-const workExperience:WorkExperience[] = [
+const workExperience: WorkExperience[] = [
     {
-        title: "Frontend Developer",
-        startDate: "2020-03-10",
-        company: "Google Inc",
-        location: "United States",
-        description: "Developed and maintained web applications using React, NextJs, and Tailwind CSS.",
+        title: "Full Stack & Mobile Developer (Next.js, Express.js, Flutter)",
+        startDate: "2024-09-01",
+        company: "Prospera Servicios Financieros",
+        location: "La Paz, Bolivia",
+        description:
+            "Within this fintech company, as a frontend developer, I am responsible for enhancing the user experience on Prospera's main websites. My responsibilities range from bug fixing to the development of new features, utilizing React.js, Next.js, and TypeScript as core technologies. Additionally, as a backend developer, I actively participate in the creation and maintenance of endpoints for Prospera's various APIs, developed using Express.js, ensuring the reliable performance of server-side services. And in the mobile section, together with the development team, we use the Flutter tool, in order to provide the common user with Prospera services on their mobile device.",
         goals: [
-            "Developed and maintained web applications using React, NodeJs, and MongoDB.",
-            "Worked with the team to develop and maintain web applications using React, NodeJs, and MongoDB.",
-            "Created and maintained web applications using React, NodeJs, and MongoDB.",
+            "Enhanced user experience on Prospera's main websites using React.js, Next.js, and TypeScript.",
+            "Participated in the development and maintenance of RESTful APIs using Express.js.",
+            "Contributed to the mobile development of Prospera's services using Flutter.",
         ],
         currentJob: true,
     },
     {
-        title: "Software Engineer",
-        startDate: "2018-03-10",
-        endDate: "2020-03-10",
-        company: "Company Name",
-        location: "United States",
-        description: "Developed and maintained web applications using React, NodeJs, and MongoDB.",
+        title: "Front End & Mobile Developer (Angular, Ionic)",
+        startDate: "2024-02-01",
+        company: "Sommos",
+        location: "Santa Cruz, Bolivia",
+        description:
+            "I collaborated with the development team to design and implement a visually appealing and interactive user interface, leveraging Angular for web development and Ionic for native app development. I actively contributed to the team's workflow by using Git and GitHub as the primary tools for version control and project management.",
         goals: [
-            "Developed and maintained web applications using React, NodeJs, and MongoDB.",
-            "Worked with the team to develop and maintain web applications using React, NodeJs, and MongoDB.",
-            "Created and maintained web applications using React, NodeJs, and MongoDB.",
+            "Developed responsive and dynamic interfaces using Angular and Ionic.",
+            "Collaborated on UI/UX design improvements for mobile and web platforms.",
+            "Managed source control and collaborated using Git and GitHub.",
         ],
-        currentJob: false,
+        currentJob: true,
     },
 ];
+
 export default workExperience;

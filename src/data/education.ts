@@ -8,32 +8,14 @@ interface Education {
     currentUni: boolean;
 }
 
-const  education: Education[] = [
+const education: Education[] = [
     {
-        title: "General English",
-        startDate: "2024-09-01",
-        endDate: "",
-        school: "University Name",
-        location: "United States",
-        description: "Developed and maintained web applications using React, NodeJs, and MongoDB.",
-        currentUni: true,
-    },
-    {
-        title: "Bachelor of Science in Computer Science",
-        startDate: "2014-09-01",
-        endDate: "2018-06-30",
-        school: "University Name",
-        location: "United States",
-        description: "Developed and maintained web applications using React, NodeJs, and MongoDB.",
-        currentUni: false,
-    },
-    {
-        title: "Bachelor of Science in Computer Science",
-        startDate: "2012-09-01",
-        endDate: "2013-06-30",
-        school: "University Name",
-        location: "United States",
-        description: "Developed and maintained web applications using React, NodeJs, and MongoDB.",
+        title: "Bachellor in Computer Science Systems Engineering",
+        startDate: "2021-02-01",
+        endDate: "2025-06-30",
+        school: "Universidad Privada Boliviana",
+        location: "Bolivia",
+        description: "Comprehensive academic formation in computer science and systems engineering, with strong emphasis on software development, algorithms, databases, and system design. Gained practical experience through academic projects using modern technologies such as React.js, Angular, Node.js, among others",
         currentUni: false,
     },
 ];

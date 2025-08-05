@@ -5,8 +5,8 @@ interface SoftSkill {
 
 const softSkills: SoftSkill[] = [
     {
-        name: "Solving Problems",
-        icon: "tools-fill"
+        name: "Scrum",
+        icon: "scrum"
     },
     {
         name: "Teamwork",
@@ -19,7 +19,11 @@ const softSkills: SoftSkill[] = [
     {
         name: "Time Management",
         icon: "time-fill"
-    }
+    },
+    {
+        name: "Solving Problems",
+        icon: "tools-fill"
+    },
 ];
 
 export default softSkills;

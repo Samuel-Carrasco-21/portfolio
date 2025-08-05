@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import moment from 'moment';
 
 /**
  * Merges multiple class values into a single string and eliminates duplicates.
@@ -18,10 +19,6 @@ export function cn(...inputs: ClassValue[]) {
  * @param {any} datetime - The datetime value to be formatted. This can be any value that can be parsed by the JavaScript Date object.
  * @returns {string} - A string representing the formatted date in 'en-US' locale, displaying the year and short month.
  */
-export const formatDatetime = (datetime: any) => {
-  const d = new Date(datetime);
-  return d.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-  });
+export const formatDatetime = (datetime: string | Date): string => {
+  return moment(datetime).format("MMM YYYY");
 };
