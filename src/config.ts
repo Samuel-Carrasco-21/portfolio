@@ -1,5 +1,5 @@
 export const SITE = {
-    website: "",
+    website: "https://samuel-carrasco-21-portfolio.vercel.app",
     title: "JC Portfolio",
     description: "A simple but beautiful portfolio created with Astro",
     tags: ["portfolio", "Resume cv", "Astro"],
@@ -9,7 +9,7 @@ export const SITE = {
     lang: "en",
     favicon: "/jsce_slogan.jpeg",
     repository: "https://github.com/Samuel-Carrasco-21/portfolio",
-    author: "Victor Alvarado",
+    author: "Samuel Carrasco",
     profile: "",
 }
 
