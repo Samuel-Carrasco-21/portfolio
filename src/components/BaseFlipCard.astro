@@ -14,71 +14,103 @@ const {
 } = Astro.props;
 ---
 
-<div
+<label
   class:list={[
-    "flip-card",
-    { interactive: !deactivateAnimation },
+    "flip-card-container",
     containerClass,
+    { "cursor-pointer": !deactivateAnimation },
   ]}
 >
+  <input type="checkbox" class="flip-checkbox" disabled={deactivateAnimation} />
+
   <div class="flip-card-inner">
     {/* Cara Frontal */}
-    <div class:list={["flip-card-front", frontClass]}>
+    <div class:list={["flip-card-face flip-card-front", frontClass]}>
       <slot name="front" />
     </div>
 
     {/* Cara Trasera */}
-    <div class:list={["flip-card-back", backClass]}>
+    <div class:list={["flip-card-face flip-card-back", backClass]}>
       <slot name="back" />
     </div>
   </div>
-</div>
+</label>
 
 <style>
-  /* Contenedor principal */
-  .flip-card {
+  .flip-card-container {
+    display: block;
     background-color: transparent;
-    perspective: 1000px !important;
+    perspective: 1000px;
     width: 22rem;
     height: 20rem;
+    position: relative;
+    /* Evita el resaltado azul al hacer tap en móviles */
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Contenedor interno */
+  .flip-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
   .flip-card-inner {
     position: relative;
     width: 100%;
     height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d !important;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
     border-radius: 1rem;
   }
 
-  /* --- LÓGICA DE ACTIVACIÓN ---
-    Solo rotamos si el elemento padre tiene la clase .interactive 
-  */
-  .flip-card.interactive:hover .flip-card-inner {
-    transform: rotateY(180deg) !important;
+  /* --- ESTADOS DE ROTACIÓN --- */
+  .flip-checkbox:checked + .flip-card-inner {
+    transform: rotateY(180deg);
   }
 
-  /* Caras de la tarjeta */
-  .flip-card-front,
+  /* --- GESTIÓN DE CAPAS (Z-INDEX) PARA MÓVILES --- */
+  /* Por defecto (Frente visible) */
+  .flip-card-front {
+    z-index: 10;
+    pointer-events: auto;
+  }
   .flip-card-back {
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Cuando está volteada (Atrás visible) 
+     Intercambiamos z-index y pointer-events para asegurar el scroll */
+  .flip-checkbox:checked + .flip-card-inner .flip-card-front {
+    z-index: 0;
+    pointer-events: none;
+  }
+  .flip-checkbox:checked + .flip-card-inner .flip-card-back {
+    z-index: 10;
+    pointer-events: auto;
+  }
+
+  /* Caras Comunes */
+  .flip-card-face {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden !important;
-    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     border-radius: 1rem;
     overflow: hidden;
+    transform: translateZ(0); /* Aceleración GPU */
   }
 
   .flip-card-front {
-    color: black;
+    transform: rotateY(0deg);
   }
-
   .flip-card-back {
-    transform: rotateY(180deg) !important;
+    transform: rotateY(180deg);
   }
 </style>

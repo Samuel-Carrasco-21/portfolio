@@ -42,14 +42,20 @@ const gridColumnClass =
   </div>
 
   <div class="relative w-full group">
-    {/* Difuminado Izquierdo */}
-    <div class="fade-overlay fade-left w-8 md:w-24"></div>
+    {
+      /* Difuminado Izquierdo 
+      CAMBIO: 'w-4' (16px) por defecto para móviles.
+      'sm:w-8' (32px) para pantallas > 640px.
+      'md:w-24' (96px) para escritorio.
+    */
+    }
+    <div class="fade-overlay fade-left w-4 sm:w-8 md:w-24"></div>
 
     {/* Contenedor Scrollable */}
     <div
       class:list={[
         "h-auto custom-scrollbar flex flex-row gap-6 overflow-x-auto overflow-y-hidden pb-8 pt-4",
-        "px-6 scroll-px-6 snap-x snap-mandatory",
+        "px-6 scroll-px-6 snap-x snap-mandatory touch-pan-x overscroll-x-contain",
         gridColumnClass,
       ]}
     >
@@ -57,7 +63,6 @@ const gridColumnClass =
         items.map((item) => (
           <div class="snap-center flex-shrink-0 card-wrapper h-full">
             {variant === "flip" ? (
-              /* FlipCard ya contiene la lógica del checkbox internamente */
               <FlipCard details={item as CardInfo} {...cardStyle} />
             ) : (
               <SkillCard
@@ -71,8 +76,12 @@ const gridColumnClass =
       }
     </div>
 
-    {/* Difuminado Derecho */}
-    <div class="fade-overlay fade-right w-8 md:w-24"></div>
+    {
+      /* Difuminado Derecho 
+      CAMBIO: Misma lógica responsiva (w-4 -> sm:w-8 -> md:w-24)
+    */
+    }
+    <div class="fade-overlay fade-right w-4 sm:w-8 md:w-24"></div>
   </div>
 </div>
 
@@ -83,11 +92,10 @@ const gridColumnClass =
     top: 0;
     bottom: 20px;
     z-index: 10;
-    pointer-events: none; /* CRUCIAL: Permite hacer click a través de la sombra hacia el checkbox */
+    pointer-events: none;
     transition: width 0.3s ease;
   }
 
-  /* Izquierda */
   .fade-left {
     left: 0;
     background: linear-gradient(
@@ -100,7 +108,6 @@ const gridColumnClass =
     border-bottom-left-radius: theme("borderRadius.lg");
   }
 
-  /* Derecha */
   .fade-right {
     right: 0;
     background: linear-gradient(
@@ -117,19 +124,24 @@ const gridColumnClass =
   .custom-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+    -webkit-overflow-scrolling: touch;
   }
+
   .custom-scrollbar::-webkit-scrollbar {
-    height: 6px;
+    height: 4px;
   }
+
   @media (min-width: 768px) {
     .custom-scrollbar::-webkit-scrollbar {
       height: 10px;
     }
   }
+
   .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
     margin: 0 20px;
   }
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: rgba(156, 163, 175, 0.3);
     border-radius: 20px;
@@ -137,6 +149,7 @@ const gridColumnClass =
     background-clip: content-box;
     transition: background-color 0.3s ease;
   }
+
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: rgba(156, 163, 175, 0.8);
   }
@@ -144,6 +157,7 @@ const gridColumnClass =
   :global(.dark) .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.15);
   }
+
   :global(.dark) .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: rgba(255, 255, 255, 0.4);
   }

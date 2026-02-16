@@ -58,11 +58,29 @@ const awardItems: CardInfo[] = awards.map((award) => ({
     </p>
   </div>
   {/*Work experience section*/}
-  <HorizontalList title="Work Experience" items={jobItems} />
+  <HorizontalList
+    title="Work Experience"
+    items={jobItems}
+    cardStyle={{
+      containerClass: "max-[426px]:!w-[14rem] max-[426px]:!min-h-[26rem]",
+    }}
+  />
   {/*Extracurricular section*/}
-  <HorizontalList title="Extracurricular" items={extracurricularItems} />
+  <HorizontalList
+    title="Extracurricular"
+    items={extracurricularItems}
+    cardStyle={{
+      containerClass: "max-[426px]:!w-[14rem] max-[426px]:!min-h-[26rem]",
+    }}
+  />
   {/*Award section*/}
-  <HorizontalList title="Awards" items={awardItems} />
+  <HorizontalList
+    title="Awards"
+    items={awardItems}
+    cardStyle={{
+      containerClass: "max-[426px]:!w-[14rem] max-[426px]:!min-h-[26rem]",
+    }}
+  />
   {/*Education section*/}
   <div class="mb-4">
     <h2 class="text-3xl font-bold mb-4">Education</h2>
