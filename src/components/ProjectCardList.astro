@@ -1,40 +1,55 @@
 ---
 // astro imports
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 // library imports
-import {cn} from "../lib/utils";
-
+import { cn } from "../lib/utils";
 
 interface Props {
-    title: string;
-    tags: string[];
-    cover: ImageMetadata;
-    id: string;
+  title: string;
+  tags: string[];
+  cover: ImageMetadata;
+  id: string;
 }
 
 const { title, tags, cover, id } = Astro.props as Props;
 ---
 
-<a href={`/projects/${id}`} class="project-card" aria-label={`View project "${title}"`}>
-    <div class="flex flex-col md:flex-row md:items-center gap-6">
-        <div class="rounded-xl h-[250px] md:w-[150px] md:h-[150px] flex-none overflow-hidden">
-            <Image
-                    transition:name={`${id}-image`}
-                    src={cover}
-                    alt={`Cover preview of the project titled "${title}"`}
-                    class="object-cover w-full h-full rounded-xl"
-            />
-        </div>
-        <div class="flex flex-col gap-2 flex-1">
-            <p class="text-sm text-n500 dark:text-light-theme">
-                {tags.join(', ')}
-            </p>
-            <div class="flex items-center justify-between mb-2">
-                <h6 class={cn("font-semibold text-xl", "text-n500 dark:text-white")}>
-                    {title}
-                </h6>
-            </div>
-        </div>
+<a
+  href={`/projects/${id}`}
+  class={cn(
+    "project-card group rounded-2xl p-2",
+    "bg-transparent",
+    "transition-all duration-300 ease-out",
+    "hover:bg-n100 dark:hover:bg-n700",
+    "hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/40",
+    "hover:-translate-y-1",
+    "active:translate-y-0 active:scale-[0.99]",
+    "active:bg-n200 dark:active:bg-n600",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light dark:focus-visible:ring-primary-dark",
+  )}
+  aria-label={`View project "${title}"`}
+>
+  <div class="flex flex-col md:flex-row md:items-center gap-6">
+    <div
+      class="rounded-xl h-[250px] md:w-[150px] md:h-[150px] flex-none overflow-hidden"
+    >
+      <Image
+        transition:name={`${id}-image`}
+        src={cover}
+        alt={`Cover preview of the project titled "${title}"`}
+        class="object-cover w-full h-full rounded-xl"
+      />
     </div>
+    <div class="flex flex-col gap-2 flex-1">
+      <p class="text-sm text-n500 dark:text-light-theme">
+        {tags.join(", ")}
+      </p>
+      <div class="flex items-center justify-between mb-2">
+        <h6 class={cn("font-semibold text-xl", "text-n500 dark:text-white")}>
+          {title}
+        </h6>
+      </div>
+    </div>
+  </div>
 </a>

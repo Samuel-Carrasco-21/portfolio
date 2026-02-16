@@ -44,9 +44,23 @@ interface WorkExperience {
  */
 const workExperience: WorkExperience[] = [
     {
-        title: "Full Stack & Mobile Developer (Next.js, Express.js, Flutter)",
+        title: "Software QA Tester (Playwright)",
+        startDate: "2025-08-01",
+        company: "Shipedge",
+        location: "United States (Remote)",
+        description:
+            "As a Software QA Engineer, I am responsible for conducting a variety of tests including smoke, regression, and stress testing, to ensure the proper functionality and reliability of the company’s products across both web and mobile platforms. In addition, I work with automation tools such as Playwright to enhance efficiency and strengthen the overall quality assurance process for our web applications.",
+        goals: [
+            "Conducted smoke, regression, and stress testing to ensure product reliability.",
+            "Validated functionality and reliability across both web and mobile platforms.",
+            "Implemented automation using Playwright to enhance QA process efficiency.",
+        ],
+        currentJob: true,
+    },
+    {
+        title: "Full Stack Developer (Next.js, Express.js, Flutter)",
         startDate: "2024-09-01",
-        company: "Prospera Servicios Financieros",
+        company: "SLAN - Servicios Financieros",
         location: "La Paz, Bolivia",
         description:
             "Within this fintech company, as a frontend developer, I am responsible for enhancing the user experience on Prospera's main websites. My responsibilities range from bug fixing to the development of new features, utilizing React.js, Next.js, and TypeScript as core technologies. Additionally, as a backend developer, I actively participate in the creation and maintenance of endpoints for Prospera's various APIs, developed using Express.js, ensuring the reliable performance of server-side services. And in the mobile section, together with the development team, we use the Flutter tool, in order to provide the common user with Prospera services on their mobile device.",
@@ -59,9 +73,10 @@ const workExperience: WorkExperience[] = [
     },
     {
         title: "Front End & Mobile Developer (Angular, Ionic)",
-        startDate: "2024-02-01",
+        startDate: "2024-01-01",
+        endDate: "2025-02-01",
         company: "Sommos",
-        location: "Santa Cruz, Bolivia",
+        location: "Santa Cruz, Bolivia (Remote)",
         description:
             "I collaborated with the development team to design and implement a visually appealing and interactive user interface, leveraging Angular for web development and Ionic for native app development. I actively contributed to the team's workflow by using Git and GitHub as the primary tools for version control and project management.",
         goals: [
@@ -69,7 +84,7 @@ const workExperience: WorkExperience[] = [
             "Collaborated on UI/UX design improvements for mobile and web platforms.",
             "Managed source control and collaborated using Git and GitHub.",
         ],
-        currentJob: true,
+        currentJob: false,
     },
 ];
 

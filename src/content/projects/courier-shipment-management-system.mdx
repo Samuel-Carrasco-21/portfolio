@@ -1,0 +1,130 @@
+---
+title: "SISTEMA DE GESTIÓN DE ENVÍOS POR COURIER. CASO DE ESTUDIO 'BCPLUS COURIER'"
+summary: "A courier shipping management system was developed, allowing automated, real-time control of the various packages and documents sent by a courier company."
+tags:
+  - React.js
+  - Express.js
+  - Node.js
+  - React Native
+  - Expo
+  - PostgreSQL
+  - Firebase
+  - Jest
+  - Docker
+startDate: 2025-02-03
+endDate: 2025-06-16
+author: "José Samuel Carrasco Encinas"
+url: "https://drive.google.com/file/d/1DRDgumz1gFzHOdxwN99CSwrOpdQlTsY3/view?usp=drive_link"
+cover: "./images/courier-shipment-management-system/courier-shipment-management-system.webp"
+ogImage: "./images/courier-shipment-management-system/courier-shipment-management-system.webp"
+---
+
+## Table of Contents
+1. [Overview](#overview)
+2. [Role](#role)
+3. [Problem](#problem)
+4. [Goal](#goal)
+5. [Solution](#solution)
+    - **Understanding User Needs**
+    - **Core Features**
+    - **Design and Development Process**
+6. [User Testing](#user-testing)
+7. [Challenges and Learnings](#challenges-and-learnings)
+8. [Final Thoughts](#final-thoughts)
+
+---
+
+## Overview
+**The System is** a comprehensive solution that includes three graphical interfaces (Web Admin, Web Client, Mobile App) and a centralized server. [cite_start]It automates the control of packages and documents in real-time for BCPlus Courier, replacing manual processes based on spreadsheets.
+
+---
+
+## Role
+**Full Stack Web & Mobile Developer**
+
+---
+
+## Problem
+BCPlus Courier faced critical operational challenges:
+1. **Lack of data consistency and integrity:** Reliance on Google Sheets led to risks of data duplication or accidental deletion without a centralized database.
+2. **Lack of automation:** Manual generation of reports (manifests) caused operational inefficiencies and time loss.
+3. **Tracking difficulties:** Clients could not visualize the status of their shipments, depending on phone calls to know the progress.
+4. **Security risks:** Sensitive data was accessible to unauthorized users due to the lack of robust access controls in shared files.
+
+---
+
+## Goal
+1. **Design and develop a management system** tailored to BCPlus Courier to improve efficiency and control of operations.
+2. **Automate critical processes** such as shipment registration, tariff calculation, and report generation.
+3. **Enable real-time tracking** for clients and administrators to visualize shipment status changes.
+4. **Ensure data integrity** by implementing a centralized database and secure role-based access.
+
+---
+
+## Solution
+
+### Understanding User Needs
+Requirements were identified through meetings with BCPlus Courier representatives to understand their manual workflows. Key needs included:
+- **Centralization:** A single source of truth to avoid errors inherent in spreadsheets.
+- **Agility:** Messengers needed a way to update status and upload proof of delivery from the field.
+- **Transparency:** Clients required direct access to shipment information without intermediaries.
+
+### Core Features by Module
+#### Director
+1. **Add admin:** Functionality to create new users with the *Administrator* role, restricted to the Director.
+2. **Register Code:** Generation of unique alphanumeric codes to allow new messengers to register in the mobile app.
+
+#### Admin
+1. **Shippings:** Real-time control of shipments, filtering by status (Pending, In Progress, Completed).
+2. **Create Shipping:** Automated registration selecting origin/destination with auto-calculated tariffs based on client type.
+3. **Manifests:** Automatic generation of reports for completed shipments, downloadable in CSV.
+4. **Clients:** Management of client profiles (personal or organization) and their specific tariff agreements.
+5. **Fees:** Interface to update and manage tariffs per client, simulating a spreadsheet for ease of use.
+6. **Geographic Management:** Tools to add new **Cities** and **Provinces** to expand operational coverage.
+
+#### Client
+1. **Tracking Portal:** A single-page application where clients enter a guide number to view current status and shipment details.
+
+#### Messenger (Mobile App)
+1. **Assigned Shipments:** Visualization of recent and assigned shipments for the specific messenger.
+2. **Status Update:** Ability to change the shipment status (e.g., to "Completed") in real-time.
+3. **Proof of Delivery:** Feature to capture and upload a photograph of the physical receipt/voucher directly to the cloud.
+4. **Manifest Generation:** Auto-generation of the messenger's manifest upon delivery completion.
+
+### Design and Development Process
+1. **Frontend:** Built using **React.js** for web interfaces and **React Native** with **Expo** for the mobile app.
+2. **Styling:** utilized **Material UI** and **Tailwind CSS** for responsive and modern design.
+3. **Backend:** A REST API built with **Node.js** and **Express.js**, containerized with **Docker**.
+4. **Database:** Hybrid approach using **PostgreSQL** (via Neon) for structured data and **Firebase Firestore** for real-time data and authentication.
+5. **Storage:** **Supabase** was used for storing binary elements like receipt images.
+
+---
+
+## User Journey
+1. **Admin:** Logs in, registers a shipment for a client. [cite_start]The system calculates the fee.
+2. **Messenger:** Receives the shipment in the app, delivers it, takes a photo of the signed receipt, and updates status to "Completed".
+3. **Client:** Enters the guide number on the public web and sees the "Completed" status and the shipment details immediately.
+4. **Admin:** Downloads the daily manifest with all completed shipments automatically.
+
+---
+
+## User Testing
+The system was validated by BCPlus Courier staff over a 1-week period.
+- **Time Reduction:** Operational times were reduced by an average of **95%** (e.g., generating a manifest went from 1 minute to 4 seconds).
+- **Messenger Satisfaction:** Rated **4.6/5** for the photo capture feature and **4.4/5** for status updates.
+- **Admin Satisfaction:** Rated **4.5/5** for shipment visualization and clarity.
+- **Client Usability:** Rated **4.3/5** for ease of tracking shipments.
+
+---
+
+## Challenges and Learnings
+1. **Mobile Deployment:** The mobile app is distributed via **.apk** files for internal Android use, as publishing to the Play Store was out of scope due to time constraints.
+2. **Data Migration:** Transitioning from manual Google Sheets to a relational database required careful planning to ensure data integrity.
+3. **Real-Time Synchronization:** Implementing Firebase to ensure admins see messenger updates instantly without page reloads.
+
+---
+
+## Final Thoughts
+1. **Operational Agility:** The mobile app transformed field operations, allowing real-time data entry instead of end-of-day transcription.
+2. **Scalability:** The architecture (Docker, PostgreSQL, Cloud Hosting) allows the system to grow with the company.
+3. **Customer Trust:** Providing a tracking portal significantly improves the company's professional image and transparency.

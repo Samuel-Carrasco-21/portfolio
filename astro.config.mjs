@@ -23,5 +23,5 @@ export default defineConfig({
         },
     },
     experimental: {
-        svg: true,
+        svgo: true,
     }});

@@ -1,25 +1,56 @@
 ---
 // data imports
 import workExperience from "@/data/Jobs.ts";
-import extracurricular from "@/data/extracurricular.ts";
+import extracurricular from "@/data/extracurriculars.ts";
 import education from "@/data/education.ts";
 import languages from "../data/languages.ts";
 import hardSkills from "@/data/hardSkills";
 import softSkills from "@/data/softSkills";
 
 // component imports
-import JobDetails from "./JobDetails.astro";
-import ExtracurricularDetail from "./ExtracurricularDetail.astro";
 import EduDetail from "./EduDetail.astro";
-import SkillCard from "./SkillCard.astro";
 
 // config import
 import { ME } from "@/config";
+import awards from "../data/awards";
+import type { CardInfo } from "../interfaces/card";
+import HorizontalList from "./HorizontalList.astro";
+import InfiniteScroll from "./infiniteScroll.astro";
+
+const jobItems: CardInfo[] = workExperience.map((job) => ({
+  title: job.title,
+  subtitle: job.company,
+  location: job.location,
+  startDate: job.startDate,
+  endDate: job.endDate,
+  current: job.currentJob,
+  description: job.description,
+  listItems: job.goals,
+}));
+
+const extracurricularItems: CardInfo[] = extracurricular.map((extra) => ({
+  title: extra.title,
+  subtitle: extra.organization,
+  location: extra.location,
+  startDate: extra.startDate,
+  endDate: extra.endDate,
+  current: extra.currentRole,
+  description: extra.description,
+  listItems: extra.responsibilities,
+}));
+
+const awardItems: CardInfo[] = awards.map((award) => ({
+  title: award.title,
+  subtitle: award.institution,
+  location: award.location,
+  startDate: award.date,
+  current: false,
+  description: award.description,
+  listItems: [],
+}));
 ---
 
-<div
-  class="relative flex flex-col gap-8 text-n700 dark:text-n200 w-full mt-10 px-4"
->
+<div class="relative flex flex-col gap-8 text-n700 dark:text-n200 w-full mt-10">
   {/*Description or About me -- Section*/}
   <div class="mb-4">
     <p>
@@ -27,23 +58,11 @@ import { ME } from "@/config";
     </p>
   </div>
   {/*Work experience section*/}
-  <div class="mb-4">
-    <h2 class="text-3xl font-bold mb-4">Work Experience</h2>
-    <div class="flex flex-col gap-6">
-      {workExperience.map((job) => <JobDetails jobData={job} />)}
-    </div>
-  </div>
+  <HorizontalList title="Work Experience" items={jobItems} />
   {/*Extracurricular section*/}
-  <div class="mb-4">
-    <h2 class="text-3xl font-bold mb-4">Extracurricular</h2>
-    <div class="flex flex-col gap-6">
-      {
-        extracurricular.map((extra) => (
-          <ExtracurricularDetail extracurricularData={extra} />
-        ))
-      }
-    </div>
-  </div>
+  <HorizontalList title="Extracurricular" items={extracurricularItems} />
+  {/*Award section*/}
+  <HorizontalList title="Awards" items={awardItems} />
   {/*Education section*/}
   <div class="mb-4">
     <h2 class="text-3xl font-bold mb-4">Education</h2>
@@ -52,30 +71,17 @@ import { ME } from "@/config";
     </div>
   </div>
   {/*Skills section*/}
-  <div class="mb-4">
-    <h2 class="text-3xl font-bold mb-4">Hard Skills</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {
-        hardSkills.map((skill) => (
-          <SkillCard {...skill} showDescription={true} />
-        ))
-      }
-    </div>
-  </div>
+  <InfiniteScroll />
   {/*Hobbies section*/}
-  <div class="mb-4">
-    <h2 class="text-2xl font-bold mb-4">Soft Skills</h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-      {
-        softSkills.map((skill) => (
-          <SkillCard {...skill} showDescription={false} />
-        ))
-      }
-    </div>
-  </div>
+  <HorizontalList
+    title="Soft Skills"
+    items={softSkills.map((skill) => ({ ...skill, showName: true }))}
+    cardStyle={{ containerClass: "!w-40 !h-24" }}
+    variant="skill"
+  />
   {/*Languages section*/}
   <div class="mb-4">
-    <h2 class="text-2xl font-bold mb-4">Languages</h2>
+    <h2 class="text-3xl font-bold mb-4">Languages</h2>
     <div class="flex flex-col gap-2">
       {
         languages.map((lang) =>
@@ -83,7 +89,7 @@ import { ME } from "@/config";
             <p>
               {lang.name} - {lang.level}
             </p>
-          ) : null
+          ) : null,
         )
       }
     </div>

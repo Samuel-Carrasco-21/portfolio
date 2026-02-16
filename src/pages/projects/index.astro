@@ -1,45 +1,72 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import {getCollection} from 'astro:content';
-import ProjectCardList from '@/components/ProjectCardList.astro';
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import ProjectCardList from "@/components/ProjectCardList.astro";
+import { cn } from "../../lib/utils";
 
 interface Project {
-    id: string;
-    data: {
-        title: string;
-        summary: string;
-        tags: string[];
-        cover: ImageMetadata;
-        startDate: Date;
-    };
+  id: string;
+  data: {
+    title: string;
+    summary: string;
+    tags: string[];
+    cover: ImageMetadata;
+    startDate: Date;
+  };
 }
 
-const allProjects = (await getCollection('projects'))
-    .sort((a, b) => b.data.startDate.getTime() - a.data.startDate.getTime());
+const allProjects = (await getCollection("projects")).sort(
+  (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
+);
 ---
 
-<Layout title="VicBox Dot Dev | Portfolio | My Projects" description="A list of my best projects" scrollSmooth={false}>
-    <>
-        <!--Projects Section-->
-        <section class="border-bottom">
-            <div class="mb-4">
-                <h2 class="text-3xl font-bold mb-8">All My Projects</h2>
-            </div>
-        </section>
-        <!--Projects List-->
-        <section class="flex flex-col gap-8">
-            {allProjects.length > 0 ? (
-                allProjects.map((project: Project) => (
-                        <ProjectCardList
-                                id={project.id}
-                                title={project.data.title}
-                                tags={project.data.tags}
-                                cover={project.data.cover}
-                        />
-                ))
-            ) : (
-                    <p>No projects found.</p>
-            )}
-        </section>
-    </>
+<Layout
+  title="VicBox Dot Dev | Portfolio | My Projects"
+  description="A list of my best projects"
+  scrollSmooth={false}
+>
+  <>
+    <button
+      type="button"
+      onclick="history.back()"
+      aria-label="Go back"
+      class={cn(
+        "mb-6 inline-flex items-center gap-2",
+        "text-sm font-medium",
+        "text-n500 dark:text-light-theme",
+        "transition-colors duration-200",
+        "hover:text-primary-light dark:hover:text-primary-dark",
+        "focus-visible:outline-none focus-visible:ring-2",
+        "focus-visible:ring-primary-light dark:focus-visible:ring-primary-dark",
+        "rounded-lg px-2 py-1",
+      )}
+    >
+      <!-- Flecha -->
+      <span aria-hidden="true">←</span>
+      <span>Back</span>
+    </button>
+    <!--Projects Section-->
+    <section class="border-bottom">
+      <div class="mb-4">
+        <h2 class="text-3xl font-bold mb-8">All My Projects</h2>
+      </div>
+    </section>
+    <!--Projects List-->
+    <section class="flex flex-col gap-8">
+      {
+        allProjects.length > 0 ? (
+          allProjects.map((project: Project) => (
+            <ProjectCardList
+              id={project.id}
+              title={project.data.title}
+              tags={project.data.tags}
+              cover={project.data.cover}
+            />
+          ))
+        ) : (
+          <p>No projects found.</p>
+        )
+      }
+    </section>
+  </>
 </Layout>

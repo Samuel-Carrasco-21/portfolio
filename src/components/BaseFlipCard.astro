@@ -1,0 +1,84 @@
+---
+interface Props {
+  containerClass?: string;
+  frontClass?: string;
+  backClass?: string;
+  deactivateAnimation?: boolean;
+}
+
+const {
+  containerClass,
+  frontClass,
+  backClass,
+  deactivateAnimation = false,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    "flip-card",
+    { interactive: !deactivateAnimation },
+    containerClass,
+  ]}
+>
+  <div class="flip-card-inner">
+    {/* Cara Frontal */}
+    <div class:list={["flip-card-front", frontClass]}>
+      <slot name="front" />
+    </div>
+
+    {/* Cara Trasera */}
+    <div class:list={["flip-card-back", backClass]}>
+      <slot name="back" />
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Contenedor principal */
+  .flip-card {
+    background-color: transparent;
+    perspective: 1000px !important;
+    width: 22rem;
+    height: 20rem;
+  }
+
+  /* Contenedor interno */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+  }
+
+  /* --- LÓGICA DE ACTIVACIÓN ---
+    Solo rotamos si el elemento padre tiene la clase .interactive 
+  */
+  .flip-card.interactive:hover .flip-card-inner {
+    transform: rotateY(180deg) !important;
+  }
+
+  /* Caras de la tarjeta */
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .flip-card-front {
+    color: black;
+  }
+
+  .flip-card-back {
+    transform: rotateY(180deg) !important;
+  }
+</style>

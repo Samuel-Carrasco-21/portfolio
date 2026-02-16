@@ -1,0 +1,150 @@
+---
+import FlipCard from "./FlipCard.astro";
+import SkillCard from "./SkillCard.astro";
+import type { CardInfo } from "../interfaces/card";
+
+interface SkillInfo {
+  icon: string;
+  name: string;
+  description?: string;
+  showDescription?: boolean;
+}
+
+interface Props {
+  title: string;
+  id?: string;
+  variant?: "flip" | "skill";
+  items: (CardInfo | SkillInfo)[];
+  containerStyle?: string;
+  cardStyle?: {
+    containerClass?: string;
+  };
+}
+
+const {
+  title,
+  items,
+  id,
+  variant = "flip",
+  containerStyle,
+  cardStyle,
+} = Astro.props;
+
+const gridColumnClass =
+  variant === "skill"
+    ? "grid-cols-[minmax(250px,1fr)] md:grid-cols-[minmax(280px,1fr)]"
+    : "grid-cols-[minmax(300px,1fr)] md:grid-cols-[minmax(340px,1fr)]";
+---
+
+<div class={`w-full mb-12 ${containerStyle}`} id={id}>
+  <div class="flex items-center justify-between mb-4 px-4 md:px-0">
+    <h2 class="text-3xl font-bold">{title}</h2>
+  </div>
+
+  <div class="relative w-full group">
+    {/* Difuminado Izquierdo */}
+    <div class="fade-overlay fade-left w-8 md:w-24"></div>
+
+    {/* Contenedor Scrollable */}
+    <div
+      class:list={[
+        "h-auto custom-scrollbar flex flex-row gap-6 overflow-x-auto overflow-y-hidden pb-8 pt-4",
+        "px-6 scroll-px-6 snap-x snap-mandatory",
+        gridColumnClass,
+      ]}
+    >
+      {
+        items.map((item) => (
+          <div class="snap-center flex-shrink-0 card-wrapper h-full">
+            {variant === "flip" ? (
+              /* FlipCard ya contiene la lógica del checkbox internamente */
+              <FlipCard details={item as CardInfo} {...cardStyle} />
+            ) : (
+              <SkillCard
+                {...(item as SkillInfo)}
+                {...cardStyle}
+                deactivateAnimation
+              />
+            )}
+          </div>
+        ))
+      }
+    </div>
+
+    {/* Difuminado Derecho */}
+    <div class="fade-overlay fade-right w-8 md:w-24"></div>
+  </div>
+</div>
+
+<style>
+  /* --- ESTILOS DEL DIFUMINADO --- */
+  .fade-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 20px;
+    z-index: 10;
+    pointer-events: none; /* CRUCIAL: Permite hacer click a través de la sombra hacia el checkbox */
+    transition: width 0.3s ease;
+  }
+
+  /* Izquierda */
+  .fade-left {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      theme("colors.dark-theme") 0%,
+      rgba(12, 21, 29, 0.4) 50%,
+      transparent 100%
+    );
+    border-top-left-radius: theme("borderRadius.lg");
+    border-bottom-left-radius: theme("borderRadius.lg");
+  }
+
+  /* Derecha */
+  .fade-right {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      theme("colors.dark-theme") 0%,
+      rgba(12, 21, 29, 0.4) 50%,
+      transparent 100%
+    );
+    border-top-right-radius: theme("borderRadius.lg");
+    border-bottom-right-radius: theme("borderRadius.lg");
+  }
+
+  /* --- SCROLLBAR --- */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  @media (min-width: 768px) {
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 10px;
+    }
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 0 20px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.3);
+    border-radius: 20px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    transition: background-color 0.3s ease;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.8);
+  }
+
+  :global(.dark) .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  :global(.dark) .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+</style>

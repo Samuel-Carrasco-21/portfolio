@@ -1,29 +1,49 @@
 ---
 // component imports
-import {Icon} from "astro-icon/components";
+import { Icon } from "astro-icon/components";
+import BaseFlipCard from "./BaseFlipCard.astro";
 
 interface SkillCardProps {
-    icon: string;
-    name: string;
-    description: string;
-    showDescription?: boolean;
+  icon: string;
+  name: string;
+  showName?: boolean;
+  containerClass?: string;
+  // Añadimos deactivateAnimation a la interfaz si no estaba
+  deactivateAnimation?: boolean;
 }
 
 const {
-    icon,
-    name,
-    description,
-    showDescription = true,
+  icon,
+  name,
+  showName = false,
+  containerClass,
+  deactivateAnimation = true, // Por defecto true para skills
 } = Astro.props as SkillCardProps;
-
 ---
 
-<div class="flex flex-col gap-2 h-skill-icon bg-white dark:bg-n700 p-4 rounded-md">
-    <div class="w-10 h-10">
-        <Icon width={40} height={40} name={icon} class="text-primary-light dark:text-primary-dark" />
+<BaseFlipCard
+  containerClass={containerClass}
+  deactivateAnimation={deactivateAnimation}
+  frontClass="bg-transparent border-none shadow-none"
+  backClass="bg-n900 dark:bg-n800 text-white border border-n200 dark:border-n700"
+>
+  <div
+    slot="front"
+    class="w-full h-full flex flex-col justify-center items-center"
+  >
+    <div
+      class="flex-shrink-0 flex items-center justify-center text-n700 dark:text-white"
+    >
+      {/* Ajustamos el tamaño del icono si es necesario */}
+      <Icon name={icon} class="w-8 h-8" />
     </div>
-    <h3 class="text-lg font-bold">{name}</h3>
+
     {
-        showDescription && <p class="text-n700 dark:text-n200">{description}</p>
+      showName && (
+        <div class="text-n700 dark:text-n200 text-sm font-medium text-center mt-2">
+          {name}
+        </div>
+      )
     }
-</div>
+  </div>
+</BaseFlipCard>

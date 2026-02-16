@@ -1,0 +1,148 @@
+---
+import hardSkills from "../data/hardSkills";
+import SkillCard from "./SkillCard.astro";
+
+interface SkillInfo {
+  icon: string;
+  name: string;
+  description?: string;
+  showDescription?: boolean;
+}
+
+// Estilos para la tarjeta individual dentro del carrusel
+const cardStyle = {
+  containerClass:
+    // !important ayuda a sobrescribir los estilos base de BaseFlipCard (w-80 h-96)
+    // flex justify-center items-center centra el contenido del label/div principal
+    "mx-4 !w-20 !h-20 flex justify-center items-center bg-white dark:bg-n800 rounded-xl shadow-md hover:scale-110 transition-transform duration-300",
+};
+---
+
+<div class="w-full mb-12">
+  <div class="flex items-center justify-between mb-6 px-4 md:px-0">
+    <h2 class="text-3xl font-bold">Hard Skills</h2>
+  </div>
+
+  <div class="logos-container">
+    <div class="logos">
+      {/* Primer Slide */}
+      <div class="logos-slide">
+        {
+          hardSkills.map((item) => (
+            <div class="card-wrapper">
+              <SkillCard
+                {...(item as SkillInfo)}
+                {...cardStyle}
+                deactivateAnimation
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Segundo Slide (Duplicado para loop infinito) */}
+      <div class="logos-slide">
+        {
+          hardSkills.map((item) => (
+            <div class="card-wrapper">
+              <SkillCard
+                {...(item as SkillInfo)}
+                {...cardStyle}
+                deactivateAnimation
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes slide {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .logos-container {
+    position: relative;
+    padding: 20px 0;
+    overflow: hidden;
+    /* Ajusta este color al fondo de tu sección si es necesario */
+    background-color: transparent;
+  }
+
+  .logos {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .logos-slide {
+    display: flex;
+    align-items: center;
+    /* Un gap consistente */
+    gap: 2rem;
+    /* Padding right para compensar el gap al final del loop */
+    padding-right: 2rem;
+    width: max-content;
+    height: 6rem;
+    animation: slide 40s infinite linear;
+  }
+
+  .logos:hover .logos-slide {
+    animation-play-state: paused;
+  }
+
+  /* Máscaras de degradado (Vignette) */
+  .logos-container::before,
+  .logos-container::after {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    content: "";
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .logos-container::before {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      theme("colors.dark-theme"),
+      transparent
+    );
+  }
+
+  :global(.dark) .logos-container::before {
+    background: linear-gradient(
+      to right,
+      theme("colors.dark-theme"),
+      transparent
+    );
+  }
+
+  .logos-container::after {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      theme("colors.dark-theme"),
+      transparent
+    );
+  }
+
+  :global(.dark) .logos-container::after {
+    background: linear-gradient(
+      to left,
+      theme("colors.dark-theme"),
+      transparent
+    );
+  }
+</style>
