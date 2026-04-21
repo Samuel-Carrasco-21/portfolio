@@ -71,6 +71,10 @@ const hardSkills: HardSkill[] = [
     name: "Django",
     icon: "django"
   },
+  {
+    name: "Laravel",
+    icon: "laravel"
+  },
 
   // Databases & Cloud
   {
