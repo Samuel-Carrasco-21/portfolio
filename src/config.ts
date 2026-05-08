@@ -28,7 +28,7 @@ export const ME = {
         linkedin: "https://www.linkedin.com/in/jose-carrasco-encinas-177727268?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
         resumeDoc: "resume.pdf",
     },
-    aboutMe: "I am José, a Software Engineer with an unwavering passion for web and mobile development. My journey in the tech industry has been driven by a deep enthusiasm for crafting user-centric digital experiences and building robust RESTful API systems following established CRUD methodologies. I thrive in the ever-evolving landscape of technology, continuously seeking opportunities to apply my expertise and grow alongside innovative teams.",
+    aboutMe: "I am José, a Software Engineer with 3 years of professional experience and B2+ English proficiency. I specialize in developing comprehensive technological solutions, ranging from architecting dynamic, high-performance user interfaces in the frontend (React.js, Next.js, Angular) to designing robust backend systems ready for cloud deployment (Node.js, Go, PHP, Java). Furthermore, I possess extensive technical expertise within the cross-platform mobile ecosystem (React Native, Ionic, Flutter), consistently focusing on delivering scalability, innovation, and technical excellence to every project.",
 }
 
 export const SOCIALS = [
