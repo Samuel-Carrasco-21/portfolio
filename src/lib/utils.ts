@@ -8,7 +8,7 @@ import moment from 'moment';
  * @param {...ClassValue[]} inputs - An array of class values which could be strings, arrays, or objects.
  * @return {string} - A single merged string of class names.
  */
-export function cn(...inputs: ClassValue[]) {
+export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs))
 }
 

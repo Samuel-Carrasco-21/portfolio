@@ -1,7 +1,7 @@
 {
   "name": "astro-portfolio",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.1.0.1",
   "description": "This portfolio site is a free and open-source template originally built with Astro by Victor Alvarado. It served as the foundation for developing this customized and updated version.",
   "license": "MIT",
   "private": true,
